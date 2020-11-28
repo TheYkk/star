@@ -60,18 +60,18 @@ func init() {
 func main() {
 	log.Printf("Init Star %s", Version)
 
-	secret := getenv("", "")
+	secret := getenv("GITHUB_SECRET", "")
 	if secret == "" {
 		log.Fatal("Github webhook secret not set")
 		return
 	}
 
-	telegramToken := getenv("", "")
+	telegramToken := getenv("TELEGRAM_TOKEN", "")
 	if telegramToken == "" {
 		log.Error("Telegram token not set")
 	}
 
-	telegramChat := getenv("", "")
+	telegramChat := getenv("TELEGRAM_CHAT", "")
 	if telegramChat == "" {
 		log.Error("Telegram Chat ID not set")
 	}
