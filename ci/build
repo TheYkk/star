@@ -1,0 +1,11 @@
+#!/bin/sh
+set -ex
+
+cd "$(dirname $0)"/..
+
+. ./ci/version
+mkdir -p dist
+
+CGO_ENABLED=0 go build -ldflags "-X main.Version=$VERSION -extldflags '-static -s'" -o dist/star main.go
+echo Built star
+
