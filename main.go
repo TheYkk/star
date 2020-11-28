@@ -47,27 +47,31 @@ func init() {
 		os.Exit(0)
 	}
 
-	log.SetFormatter(&log.JSONFormatter{
-		PrettyPrint: true,
-	})
+	if Version == "dev" {
+		log.SetFormatter(&log.JSONFormatter{
+			PrettyPrint: true,
+		})
+	}else{
+		log.SetFormatter(&log.JSONFormatter{})
+	}
 	log.SetReportCaller(true)
 }
 
 func main() {
 	log.Printf("Init Star %s", Version)
 
-	secret := getenv("GITHUB_SECRET", "")
+	secret := getenv("", "")
 	if secret == "" {
 		log.Fatal("Github webhook secret not set")
 		return
 	}
 
-	telegramToken := getenv("TELEGRAM_TOKEN", "")
+	telegramToken := getenv("", "")
 	if telegramToken == "" {
 		log.Error("Telegram token not set")
 	}
 
-	telegramChat := getenv("TELEGRAM_CHAT", "")
+	telegramChat := getenv("", "")
 	if telegramChat == "" {
 		log.Error("Telegram Chat ID not set")
 	}

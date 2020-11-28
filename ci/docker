@@ -1,0 +1,8 @@
+#!/bin/sh
+set -ex
+
+cd "$(dirname $0)"/..
+
+. ./ci/version
+docker build -t theykk/star:$VERSION .
+docker push theykk/star:$VERSION
